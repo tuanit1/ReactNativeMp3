@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "334290680991",
+    "project_id": "reactnativemp3",
+    "storage_bucket": "reactnativemp3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:334290680991:android:118beaf50042d0060fb6aa",
+        "android_client_info": {
+          "package_name": "com.reactnativemp3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "334290680991-9b8se1v6mpm294fok3cjf8dc54fmhv0f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reactnativemp3",
+            "certificate_hash": "30d1689ad4fee025241eb3a84a1531e0996d7554"
+          }
+        },
+        {
+          "client_id": "334290680991-uc7nk64uor2oqk4sq68ajmibsakrco0u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2FpIj3SZaiI0xgMZhSiau-bNRuDvFGvQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "334290680991-uc7nk64uor2oqk4sq68ajmibsakrco0u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
