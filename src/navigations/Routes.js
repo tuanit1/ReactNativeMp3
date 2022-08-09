@@ -1,29 +1,10 @@
 import React, { useState, useEffect, useContext } from "react"
 import { AuthContext } from "../auth/AuthProvider"
 import auth from '@react-native-firebase/auth'
-import { View, Button, Text } from "react-native"
-import LoginScreen from "../screens/LoginScreen"
-
-const WelcomeScreen = () => {
-    const { user, logout } = useContext(AuthContext);
-
-    return (
-        <View style={{
-            flex: 1,
-            flexDirection: 'column',
-            backgroundColor: 'white',
-            justifyContent: 'center',
-            alignItems: 'center',
-            color: 'black'
-        }}>
-            <Text>Welcome { user.email }</Text>
-            <Button
-                onPress={logout}
-                title="Log out"
-            />
-        </View>
-    )
-}
+import LoginScreen from "../screens/Auths/LoginScreen"
+import WelcomeScreen from "../screens/Auths/WelcomeScreen"
+import { NavigationContainer } from "@react-navigation/native"
+import AuthStack from "../navigations/AuthStack"
 
 const Routes = () => {
     const { user, setUser } = useContext(AuthContext);
@@ -47,8 +28,11 @@ const Routes = () => {
 
     return (
         <>
-            {console.log("Mount component")}
-            {user ? <WelcomeScreen /> : <LoginScreen />}
+            <NavigationContainer>
+                {console.log("Mount component")}
+                {user ? <AuthStack /> : <AuthStack />}
+            </NavigationContainer>
+
         </>
 
     );

@@ -1,25 +1,24 @@
 import React from 'react';
 import {
-    View, TouchableOpacity, Text, StyleSheet, Dimensions,
+    View, TouchableOpacity, Text, StyleSheet,
     PixelRatio, Image
 } from "react-native"
 import { useState, useContext } from "react";
-import { AuthContext } from "../auth/AuthProvider";
-import { bg_color, text_color, main_color } from '../assets/colors';
-import FormInput from '../components/FormInput';
-import FormButton from '../components/FormButton';
+import { AuthContext } from "../../auth/AuthProvider";
+import { bg_color, text_color, main_color } from '../../assets/colors';
+import FormInput from '../../components/FormInput';
+import FormButton from '../../components/FormButton';
+import { createConstant } from '../../utils/Constant';
 
-const HEIGHT = Dimensions.get("window").height;
-const WIDTH = Dimensions.get("window").width;
+const Constant = createConstant()
+const HEIGHT = Constant.HEIGHT;
+const WIDTH = Constant.WIDTH;
 
 const LoginScreen = () => {
 
     const { login, signup } = useContext(AuthContext)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    console.log("email: ", email);
-    console.log("password: ", password);
 
     return (
         <View style={{
@@ -56,15 +55,6 @@ const LoginScreen = () => {
                     onChangeText={(password) => setPassword(password)}
                 />
 
-                {/* 
-                <Button
-                    title="Sign up"
-                    onPress={() => signup(email, password)}
-                />
-                <Button
-                    title="Login"
-                    onPress={() => login(email, password)}
-                /> */}
             </View>
 
             <View>
@@ -106,15 +96,15 @@ const LoginScreen = () => {
                     width: WIDTH * 0.85,
                 }}>
                     <TouchableOpacity style={styles.social_btn}>
-                        <Image resizeMode='center' style={styles.social_img} source={require('../assets/icons/ic_google.png')} />
+                        <Image resizeMode='center' style={styles.social_img} source={require('../../assets/icons/ic_google.png')} />
                     </TouchableOpacity>
 
                     <TouchableOpacity style={styles.social_btn}>
-                        <Image resizeMode='center' style={styles.social_img} source={require('../assets/icons/ic_apple.png')} />
+                        <Image resizeMode='center' style={styles.social_img} source={require('../../assets/icons/ic_apple.png')} />
                     </TouchableOpacity>
 
                     <TouchableOpacity style={styles.social_btn}>
-                        <Image resizeMode='center' style={styles.social_img} source={require('../assets/icons/ic_facebook.png')} />
+                        <Image resizeMode='center' style={styles.social_img} source={require('../../assets/icons/ic_facebook.png')} />
                     </TouchableOpacity>
                 </View>
             </View>
