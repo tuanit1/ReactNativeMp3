@@ -27,13 +27,11 @@ const Routes = () => {
     if (initializing) return null;
 
     return (
-        <>
-            <NavigationContainer>
-                {console.log("Mount component")}
-                {user ? <AuthStack /> : <AuthStack />}
-            </NavigationContainer>
 
-        </>
+        <NavigationContainer>
+            {console.log("Mount component")}
+            {user ? <AuthStack /> : <AuthStack />}
+        </NavigationContainer>
 
     );
 }

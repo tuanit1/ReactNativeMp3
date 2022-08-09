@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, Image, StyleSheet, Text, TouchableOpacity, Platform } from "react-native";
 import { createConstant } from "../../utils/Constant"
 import { bg_color, text_color } from "../../assets/colors";
 
@@ -19,24 +19,29 @@ const WelcomeScreen = ({ navigation }) => {
                 />
             </View>
             <View style={styles.title_container}>
-                <Text style={{
+                <View style={{
                     position: 'absolute',
-                    top: (HEIGHT / 2) * 0.16,
-                    color: text_color,
-                    fontWeight: 'bold',
-                    fontSize: HEIGHT * 0.038,
-                    textAlign: 'center',
-                    width: WIDTH * 0.7
-                }}>Discover your endless music world</Text>
+                    top: (HEIGHT / 2) * 0.1,
+                    flexDirection: 'column',
+                    alignItems: 'center'
+                }}>
+                    <Text style={{
+                        color: text_color,
+                        fontWeight: 'bold',
+                        fontSize: HEIGHT * 0.038,
+                        textAlign: 'center',
+                        width: WIDTH * 0.7,
+                        marginBottom: (HEIGHT/2) * 0.05
+                    }}>Discover your endless music world</Text>
 
-                <Text style={{
-                    position: 'absolute',
-                    top: (HEIGHT / 2) * 0.42,
-                    color: text_color,
-                    fontSize: HEIGHT * 0.02,
-                    textAlign: 'center',
-                    width: WIDTH * 0.8
-                }}>Listen and feel the colorful world of music with a variety of genres. Let's start</Text>
+                    <Text style={{
+                        color: text_color,
+                        fontSize: HEIGHT * 0.02,
+                        textAlign: 'center',
+                        width: WIDTH * 0.8
+                    }}>Listen and feel the colorful world of music with a variety of genres. Let's start</Text>
+                </View>
+
 
                 <View style={styles.bottom}>
                     <TouchableOpacity style={styles.btn_login}
@@ -69,7 +74,8 @@ const styles = StyleSheet.create({
 
     img_container: {
         flex: 1,
-        margin: WIDTH * 0.03,
+        marginHorizontal: WIDTH * 0.04,
+        marginTop: Platform.OS === 'ios' ? (WIDTH * 0.04) + 40 : WIDTH * 0.04
     },
 
     image: {

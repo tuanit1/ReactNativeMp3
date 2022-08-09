@@ -5,8 +5,8 @@ platform :ios, '12.4'
 install! 'cocoapods', :deterministic_uuids => false
 
 target 'ReactNativeMp3' do
-  config = use_native_modules!
   use_frameworks!
+  config = use_native_modules!
 
   # Flags change depending on the env values.
   flags = get_default_flags()
@@ -35,6 +35,15 @@ target 'ReactNativeMp3' do
   # use_flipper!()
 
   post_install do |installer|
+
+    # installer.pod_targets.each do |pod|
+    #   if pod.name.eql?('RNScreens')
+    #     def pod.build_type
+    #       Pod::BuildType.static_library
+    #     end
+    #   end
+    # end
+
     react_native_post_install(installer)
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
   end
