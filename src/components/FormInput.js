@@ -3,6 +3,7 @@ import {
     View, StyleSheet, TextInput, Dimensions,
     Image, TouchableOpacity
 } from 'react-native';
+import { text_color } from '../assets/colors';
 
 const HEIGHT = Dimensions.get("window").height;
 const WIDTH = Dimensions.get("window").width;
@@ -44,13 +45,13 @@ const styles = StyleSheet.create({
         marginVertical: HEIGHT * 0.01,
         backgroundColor: '#E7E7E7',
         borderRadius: HEIGHT * 0.022,
-        shadowColor: 'white',
+        shadowColor: text_color,
         shadowOffset: {
             width: 0,
-            height: 3
+            height: 5
         },
-        shadowRadius: 5,
-        shadowOpacity: 1.0
+        shadowRadius: 7,
+        shadowOpacity: 0.2
     },
 
     input: {

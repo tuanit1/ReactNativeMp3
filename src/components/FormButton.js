@@ -28,13 +28,13 @@ const styles = StyleSheet.create({
         paddingHorizontal: WIDTH * 0.03,
         backgroundColor: main_color,
         borderRadius: HEIGHT * 0.022,
-        shadowColor: 'white',
+        shadowColor: main_color,
         shadowOffset: {
             width: 0,
-            height: 3
+            height: 2
         },
-        shadowRadius: 5,
-        shadowOpacity: 1.0
+        shadowRadius: 7,
+        shadowOpacity: 0.7
     }
 })
 
