@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Modal, View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { createConstant } from "../utils/Constant";
 import { main_color } from "../assets/colors"
@@ -6,8 +6,6 @@ import { main_color } from "../assets/colors"
 const Constant = createConstant()
 
 const MessageModal = ({ modalVisible, setModalVisible, param }) => {
-
-    console.log("Render modal: ", param);
 
     return (
         <Modal
@@ -90,4 +88,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default MessageModal
+export default memo(MessageModal)

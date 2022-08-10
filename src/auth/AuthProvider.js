@@ -1,5 +1,6 @@
 import React, { createContext, useState } from "react";
-import auth from '@react-native-firebase/auth'
+import auth from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import MessageModal from '../components/MessageModal'
 
 const AuthContext = createContext({});
@@ -8,7 +9,7 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [skip, setSkip] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
-    const [modalParam, setModalParam] = useState({title: 'Title', message: 'Description'});
+    const [modalParam, setModalParam] = useState({ title: 'Title', message: 'Description' });
 
     const logout = async () => {
 
@@ -17,6 +18,16 @@ const AuthProvider = ({ children }) => {
         if (skip) {
             setSkip(false);
         } else {
+
+
+            GoogleSignin.isSignedIn()
+                .then(isSignIn => {
+                    if(isSignIn) {
+                        GoogleSignin.signOut();
+                    }
+                })
+            ;
+
             await auth().signOut()
                 .then(() => {
                     console.log("Logout successfully!")
@@ -36,7 +47,7 @@ const AuthProvider = ({ children }) => {
             })
             .catch(error => {
                 console.log(error);
-                switch(error.code){
+                switch (error.code) {
                     case 'auth/invalid-email':
                         setModalParam({
                             title: 'Alert',
@@ -56,6 +67,26 @@ const AuthProvider = ({ children }) => {
             });
     }
 
+    const googleLogin = async () => {
+        console.log('Click Google login');
+
+        const { idToken } = await GoogleSignin.signIn();
+        const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+        await auth().signInWithCredential(googleCredential)
+            .then(() => console.log('Google login successfully!'))
+            .catch(error => {
+                console.log(error);
+                setModalParam({
+                    title: 'Alert',
+                    message: 'Something went wrong, Please try again!'
+                });
+                setModalVisible(true);
+            })
+
+
+    }
+
     const signup = async (email, password) => {
         console.log('Click Signup');
         await auth().createUserWithEmailAndPassword(email, password)
@@ -64,7 +95,7 @@ const AuthProvider = ({ children }) => {
             })
             .catch(error => {
                 console.log(error);
-                switch(error.code){
+                switch (error.code) {
                     case 'auth/invalid-email':
                         setModalParam({
                             title: 'Alert',
@@ -94,12 +125,11 @@ const AuthProvider = ({ children }) => {
                 setUser,
                 setSkip,
                 login,
+                googleLogin,
                 logout,
                 signup,
             }}>
 
-            {console.log("object: ", modalParam)}
-            
             <MessageModal
                 modalVisible={modalVisible}
                 setModalVisible={setModalVisible}

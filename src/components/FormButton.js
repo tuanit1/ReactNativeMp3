@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import { View, TouchableOpacity, Text, StyleSheet, Dimensions } from 'react-native';
 import { main_color, text_color } from "../assets/colors";
 
@@ -7,6 +7,9 @@ const WIDTH = Dimensions.get("window").width;
 
 
 const FormButton = ({ title, clickListener }) => {
+
+    console.log("Re-render FormButton");
+
     return (
         <TouchableOpacity style={styles.container} onPress={clickListener}>
             <Text style={{
@@ -38,4 +41,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default FormButton;
+export default memo(FormButton);

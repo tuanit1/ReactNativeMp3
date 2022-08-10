@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import {
     View, StyleSheet, TextInput, Dimensions,
     Image, TouchableOpacity
@@ -11,6 +11,8 @@ const WIDTH = Dimensions.get("window").width;
 const FormInput = ({ isPassword, placeholder, ...rest }) => {
 
     const [showPass, setShowPass] = useState(!isPassword);
+
+    console.log("Re-render FormInput");
 
     return (
         <View style={styles.container}>
@@ -68,4 +70,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default FormInput;
+export default memo(FormInput);

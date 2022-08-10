@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "334290680991-9b8se1v6mpm294fok3cjf8dc54fmhv0f.apps.googleusercontent.com",
+          "client_id": "334290680991-5ad0b8fo0chnblcoaib0sntqf5mm8usu.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.reactnativemp3",
-            "certificate_hash": "30d1689ad4fee025241eb3a84a1531e0996d7554"
+            "certificate_hash": "1bc41b67b82d09b3e171e5f9ccf98d8564272acf"
           }
         },
         {
@@ -37,6 +37,13 @@
             {
               "client_id": "334290680991-uc7nk64uor2oqk4sq68ajmibsakrco0u.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "334290680991-ou6qvb1qovtkn1ust2bhqerhpbqgh7el.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.reactnativemp3"
+              }
             }
           ]
         }

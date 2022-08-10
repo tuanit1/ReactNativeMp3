@@ -29,8 +29,6 @@ const Welcome = () => {
 const Routes = () => {
     const { user, setUser, skip } = useContext(AuthContext);
 
-    console.log('skip: ', skip)
-
     const [initializing, setInitializing] = useState(true);
 
     console.log("Component re-render");

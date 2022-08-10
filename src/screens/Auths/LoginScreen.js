@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
     View, SafeAreaView, TouchableOpacity, Text, StyleSheet,
     PixelRatio, Image
@@ -17,11 +17,25 @@ const WIDTH = Constant.WIDTH;
 
 const LoginScreen = () => {
 
-    const { login } = useContext(AuthContext)
+    const { login, googleLogin } = useContext(AuthContext)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
-    const [modalParam, setModalParam] = useState({title: 'Title', message: 'Description'});
+    const [modalParam, setModalParam] = useState({ title: 'Title', message: 'Description' });
+
+    const handleSignIn = useCallback(() => {
+        console.log("Login click: ", email + ' and ' + password);
+        login(email, password);
+    }, [email, password]);
+
+    const onChangeEmail = useCallback((email) => {
+        setEmail(email);
+    }, [])
+
+    const onChangePassword = useCallback((password) => {
+        setPassword(password);
+    }, [])
+
 
     return (
         <SafeAreaView style={{
@@ -55,12 +69,12 @@ const LoginScreen = () => {
                 <FormInput
                     isPassword={false}
                     placeholder="Enter email"
-                    onChangeText={(email) => setEmail(email)}
+                    onChangeText={onChangeEmail}
                 />
                 <FormInput
                     isPassword={true}
                     placeholder="Password"
-                    onChangeText={(password) => setPassword(password)}
+                    onChangeText={onChangePassword}
                 />
 
             </View>
@@ -72,8 +86,7 @@ const LoginScreen = () => {
             </View>
 
             <View style={styles.view_button}>
-                <FormButton title={"Sign in"} clickListener={() => login(email, password)} />
-
+                <FormButton title={"Sign in"} clickListener={handleSignIn} />
 
                 <View style={{
                     flexDirection: 'row',
@@ -103,7 +116,8 @@ const LoginScreen = () => {
                     justifyContent: 'space-evenly',
                     width: WIDTH * 0.85,
                 }}>
-                    <TouchableOpacity style={styles.social_btn}>
+                    <TouchableOpacity style={styles.social_btn}
+                        onPress={googleLogin}>
                         <Image resizeMode='center' style={styles.social_img} source={require('../../assets/icons/ic_google.png')} />
                     </TouchableOpacity>
 
