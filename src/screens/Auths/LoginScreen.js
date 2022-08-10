@@ -77,12 +77,10 @@ const LoginScreen = () => {
                     onChangeText={onChangePassword}
                 />
 
-            </View>
-
-            <View>
                 <TouchableOpacity style={styles.view_forgot}>
                     <Text style={{ color: text_color, fontWeight: "bold", fontSize: HEIGHT * 0.018 }}>Forgot Password?</Text>
                 </TouchableOpacity>
+
             </View>
 
             <View style={styles.view_button}>
@@ -197,9 +195,8 @@ const styles = StyleSheet.create({
     },
 
     view_forgot: {
-        position: 'absolute',
-        top: HEIGHT * 0.48,
-        right: WIDTH * 0.09,
+        marginTop: HEIGHT*0.01,
+        marginRight: WIDTH*0.09,
         alignSelf: 'flex-end'
     },
 
