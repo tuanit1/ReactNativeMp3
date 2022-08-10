@@ -1,7 +1,8 @@
-import React from "react";
-import { View, Image, StyleSheet, Text, TouchableOpacity, Platform } from "react-native";
+import React, { useContext } from "react";
+import { View, Image, StyleSheet, Text, TouchableOpacity, SafeAreaView } from "react-native";
 import { createConstant } from "../../utils/Constant"
 import { bg_color, text_color } from "../../assets/colors";
+import { AuthContext } from "../../auth/AuthProvider";
 
 const Constant = createConstant();
 const HEIGHT = Constant.HEIGHT;
@@ -9,8 +10,10 @@ const WIDTH = Constant.WIDTH;
 
 const WelcomeScreen = ({ navigation }) => {
 
+    const { setSkip } = useContext(AuthContext)
+
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <View style={styles.img_container}>
                 <Image
                     style={styles.image}
@@ -31,7 +34,7 @@ const WelcomeScreen = ({ navigation }) => {
                         fontSize: HEIGHT * 0.038,
                         textAlign: 'center',
                         width: WIDTH * 0.7,
-                        marginBottom: (HEIGHT/2) * 0.05
+                        marginBottom: (HEIGHT / 2) * 0.05
                     }}>Discover your endless music world</Text>
 
                     <Text style={{
@@ -52,7 +55,8 @@ const WelcomeScreen = ({ navigation }) => {
                             fontSize: HEIGHT * 0.02,
                         }}>Sign in</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.btn_skip}>
+                    <TouchableOpacity style={styles.btn_skip}
+                        onPress={() => setSkip(true)}>
                         <Text style={{
                             color: text_color,
                             fontWeight: 'bold',
@@ -61,7 +65,7 @@ const WelcomeScreen = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
             </View>
-        </View>
+        </SafeAreaView>
     );
 
 }
@@ -75,7 +79,7 @@ const styles = StyleSheet.create({
     img_container: {
         flex: 1,
         marginHorizontal: WIDTH * 0.04,
-        marginTop: Platform.OS === 'ios' ? (WIDTH * 0.04) + 40 : WIDTH * 0.04
+        marginTop: WIDTH * 0.04
     },
 
     image: {
@@ -103,6 +107,7 @@ const styles = StyleSheet.create({
 
     btn_login: {
         flex: 1,
+        height: (HEIGHT / 2) * 0.145,
         backgroundColor: text_color,
         borderRadius: HEIGHT * 0.0205,
         justifyContent: 'center',

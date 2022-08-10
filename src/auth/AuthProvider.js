@@ -1,20 +1,31 @@
 import React, { createContext, useState } from "react";
 import auth from '@react-native-firebase/auth'
+import MessageModal from '../components/MessageModal'
 
 const AuthContext = createContext({});
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [skip, setSkip] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [modalParam, setModalParam] = useState({title: 'Title', message: 'Description'});
 
     const logout = async () => {
+
         console.log('Click Log out');
-        await auth().signOut()
-            .then(() => {
-                console.log("Logout successfully!")
-            })
-            .catch(error => {
-                console.error(error);
-            });
+
+        if (skip) {
+            setSkip(false);
+        } else {
+            await auth().signOut()
+                .then(() => {
+                    console.log("Logout successfully!")
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+
     }
 
     const login = async (email, password) => {
@@ -24,7 +35,24 @@ const AuthProvider = ({ children }) => {
                 console.log('Login successfully!');
             })
             .catch(error => {
-                console.error(error);
+                console.log(error);
+                switch(error.code){
+                    case 'auth/invalid-email':
+                        setModalParam({
+                            title: 'Alert',
+                            message: 'The email address is not valid'
+                        });
+                        setModalVisible(true);
+                        break;
+                    case 'auth/user-not-found':
+                    case 'auth/wrong-password':
+                        setModalParam({
+                            title: 'Alert',
+                            message: 'Incorrect email or password'
+                        });
+                        setModalVisible(true);
+                        break;
+                }
             });
     }
 
@@ -35,14 +63,23 @@ const AuthProvider = ({ children }) => {
                 console.log('User account created & signed in!');
             })
             .catch(error => {
-                // if (error.code === 'auth/email-already-in-use') {
-                //     console.log('That email address is already in use!');
-                // }
-
-                // if (error.code === 'auth/invalid-email') {
-                //     console.log('That email address is invalid!');
-                // }
-                console.error(error);
+                console.log(error);
+                switch(error.code){
+                    case 'auth/invalid-email':
+                        setModalParam({
+                            title: 'Alert',
+                            message: 'The email address is not valid'
+                        });
+                        setModalVisible(true);
+                        break;
+                    case 'auth/email-already-in-use':
+                        setModalParam({
+                            title: 'Alert',
+                            message: ' There already exists an account with the given email address'
+                        });
+                        setModalVisible(true);
+                        break;
+                }
             });
     }
 
@@ -53,11 +90,21 @@ const AuthProvider = ({ children }) => {
         <AuthContext.Provider
             value={{
                 user,
+                skip,
                 setUser,
+                setSkip,
                 login,
                 logout,
                 signup,
             }}>
+
+            {console.log("object: ", modalParam)}
+            
+            <MessageModal
+                modalVisible={modalVisible}
+                setModalVisible={setModalVisible}
+                param={modalParam}
+            />
             {children}
         </AuthContext.Provider>
     )

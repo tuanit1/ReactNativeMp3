@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    View, TouchableOpacity, Text, StyleSheet,
+    View, SafeAreaView, TouchableOpacity, Text, StyleSheet,
     PixelRatio, Image
 } from "react-native"
 import { useState, useContext } from "react";
@@ -9,6 +9,7 @@ import { bg_color, text_color, main_color } from '../../assets/colors';
 import FormInput from '../../components/FormInput';
 import FormButton from '../../components/FormButton';
 import { createConstant } from '../../utils/Constant';
+import MessageModal from '../../components/MessageModal';
 
 const Constant = createConstant()
 const HEIGHT = Constant.HEIGHT;
@@ -16,17 +17,24 @@ const WIDTH = Constant.WIDTH;
 
 const LoginScreen = () => {
 
-    const { login, signup } = useContext(AuthContext)
+    const { login } = useContext(AuthContext)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
+    const [modalParam, setModalParam] = useState({title: 'Title', message: 'Description'});
 
     return (
-        <View style={{
+        <SafeAreaView style={{
             flex: 1,
             flexDirection: 'column',
             backgroundColor: 'white',
             backgroundColor: bg_color
         }}>
+            <MessageModal
+                modalVisible={modalVisible}
+                setModalVisible={setModalVisible}
+                param={modalParam}
+            />
             <View style={styles.view_title}>
                 <Text style={{
                     fontWeight: 'bold',
@@ -99,7 +107,8 @@ const LoginScreen = () => {
                         <Image resizeMode='center' style={styles.social_img} source={require('../../assets/icons/ic_google.png')} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.social_btn}>
+                    <TouchableOpacity style={styles.social_btn}
+                        onPress={() => setModalVisible(true)}>
                         <Image resizeMode='center' style={styles.social_img} source={require('../../assets/icons/ic_apple.png')} />
                     </TouchableOpacity>
 
@@ -127,7 +136,7 @@ const LoginScreen = () => {
             </View>
 
 
-        </View >
+        </SafeAreaView>
     )
 }
 
