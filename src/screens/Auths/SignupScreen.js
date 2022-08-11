@@ -144,13 +144,13 @@ const styles = StyleSheet.create({
     view_image: {
         position: 'absolute',
         alignItems: 'center',
-        top: HEIGHT * 0.08,
+        top: HEIGHT * 0.15,
         width: WIDTH
     },
 
     image: {
-        height: HEIGHT * 0.3,
-        width: WIDTH * 0.8
+        height: HEIGHT * 0.2,
+        width: HEIGHT * 0.2
     },
 
     view_input: {
