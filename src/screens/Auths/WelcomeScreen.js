@@ -12,6 +12,8 @@ const WelcomeScreen = ({ navigation }) => {
 
     const { setSkip } = useContext(AuthContext)
 
+    console.log("WelcomScreen re-render");
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.img_container}>

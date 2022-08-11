@@ -3,6 +3,7 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import LoginScreen from '../screens/Auths/LoginScreen';
 import WelcomeScreen from '../screens/Auths/WelcomeScreen';
+import SignupScreen from '../screens/Auths/SignupScreen';
 import { createConstant } from '../utils/Constant'
 
 const Stack = createNativeStackNavigator()
@@ -25,6 +26,7 @@ const AuthStack = () => {
         >
             <Stack.Screen name={Constant.LOGIN_SCREEN} component={LoginScreen} />
             <Stack.Screen name={Constant.WELCOME_SCREEN} component={WelcomeScreen} />
+            <Stack.Screen name={Constant.SIGNUP_SCREEN} component={SignupScreen} />
         </Stack.Navigator>
     )
 }

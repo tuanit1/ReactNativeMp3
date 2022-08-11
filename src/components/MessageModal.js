@@ -9,7 +9,7 @@ const MessageModal = ({ modalVisible, setModalVisible, param }) => {
 
     return (
         <Modal
-            animationType="slide"
+            animationType="fade"
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => {

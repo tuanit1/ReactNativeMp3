@@ -1,31 +1,58 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState, useContext } from 'react';
 import {
     View, SafeAreaView, TouchableOpacity, Text, StyleSheet,
     PixelRatio, Image
 } from "react-native"
-import { useState, useContext } from "react";
 import { AuthContext } from "../../auth/AuthProvider";
 import { bg_color, text_color, main_color } from '../../assets/colors';
 import FormInput from '../../components/FormInput';
 import FormButton from '../../components/FormButton';
 import { createConstant } from '../../utils/Constant';
 import MessageModal from '../../components/MessageModal';
+import { checkWifiConnection } from '../../utils/Methods'
+import ButtonBack from '../../components/ButtonBack';
+import Progressbar from '../../components/Progressbar';
 
 const Constant = createConstant()
 const HEIGHT = Constant.HEIGHT;
 const WIDTH = Constant.WIDTH;
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
 
-    const { login, googleLogin } = useContext(AuthContext)
+    const { login, googleLogin, showProgress, setShowProgress } = useContext(AuthContext)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
     const [modalParam, setModalParam] = useState({ title: 'Title', message: 'Description' });
 
+
+    const showMessageModal = (title, message) => {
+        setModalParam({
+            title,
+            message
+        });
+
+        setModalVisible(true);
+    }
+
     const handleSignIn = useCallback(() => {
-        console.log("Login click: ", email + ' and ' + password);
-        login(email, password);
+
+        checkWifiConnection().then(isConnected => {
+
+            if (email === "" || password === "") {
+
+                showMessageModal("Alert", "Please enter all fields")
+
+                return;
+            }
+
+            if (isConnected === true) {
+                login(email, password);
+            } else {
+                showMessageModal("Alert", "No internet connection")
+            }
+        })
+
     }, [email, password]);
 
     const onChangeEmail = useCallback((email) => {
@@ -41,14 +68,21 @@ const LoginScreen = () => {
         <SafeAreaView style={{
             flex: 1,
             flexDirection: 'column',
-            backgroundColor: 'white',
             backgroundColor: bg_color
         }}>
+
+            {showProgress &&
+                <Progressbar />
+            }
+
             <MessageModal
                 modalVisible={modalVisible}
                 setModalVisible={setModalVisible}
                 param={modalParam}
             />
+
+            <ButtonBack navigation={navigation} />
+
             <View style={styles.view_title}>
                 <Text style={{
                     fontWeight: 'bold',
@@ -70,6 +104,7 @@ const LoginScreen = () => {
                     isPassword={false}
                     placeholder="Enter email"
                     onChangeText={onChangeEmail}
+                    keyboardType="email-address"
                 />
                 <FormInput
                     isPassword={true}
@@ -137,7 +172,8 @@ const LoginScreen = () => {
                     fontWeight: 'bold'
                 }}>Not a member?</Text>
 
-                <TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate(Constant.SIGNUP_SCREEN)}>
                     <Text style={{
                         color: main_color,
                         fontSize: HEIGHT * 0.019,
@@ -195,8 +231,8 @@ const styles = StyleSheet.create({
     },
 
     view_forgot: {
-        marginTop: HEIGHT*0.01,
-        marginRight: WIDTH*0.09,
+        marginTop: HEIGHT * 0.01,
+        marginRight: WIDTH * 0.09,
         alignSelf: 'flex-end'
     },
 

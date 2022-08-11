@@ -21,6 +21,7 @@ const FormInput = ({ isPassword, placeholder, ...rest }) => {
                 placeholderTextColor="#5C5A59"
                 selectionColor="#5C5A59"
                 secureTextEntry={ showPass ? false : true}
+                autoCapitalize='none'
                 {...rest}
             />
 
