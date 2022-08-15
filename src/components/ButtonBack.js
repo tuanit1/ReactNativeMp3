@@ -1,9 +1,10 @@
 import React from 'react';
-import {TouchableOpacity, Image, StyleSheet} from 'react-native'
+import { TouchableOpacity, Image, StyleSheet } from 'react-native'
 import { createConstant } from '../utils/Constant';
 import { text_color } from '../assets/colors'
 
 const Constant = createConstant()
+
 
 const ButtonBack = ({ navigation }) => {
     return (
@@ -17,8 +18,8 @@ const ButtonBack = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        top: Constant.HEIGHT*0.03,
-        left: Constant.HEIGHT*0.03 
+        top: Constant.HEIGHT * 0.03,
+        left: Constant.HEIGHT * 0.03
     },
 
     image: {

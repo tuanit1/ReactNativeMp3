@@ -3,7 +3,7 @@ import {
     View, SafeAreaView, TouchableOpacity, Text, StyleSheet,
     PixelRatio, Image
 } from "react-native"
-import { AuthContext } from "../../auth/AuthProvider";
+import { AuthContext } from "../../providers/AuthProvider";
 import { bg_color, text_color, main_color } from '../../assets/colors';
 import FormInput from '../../components/FormInput';
 import FormButton from '../../components/FormButton';

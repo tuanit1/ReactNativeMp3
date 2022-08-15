@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, memo } from "react"
-import { AuthContext } from "../auth/AuthProvider"
+import { AuthContext } from "../providers/AuthProvider"
 import auth from '@react-native-firebase/auth'
 import { NavigationContainer } from "@react-navigation/native"
 import AuthStack from "../navigations/AuthStack"

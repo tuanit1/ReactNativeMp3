@@ -7,7 +7,7 @@ import ButtonBack from "../../components/ButtonBack";
 import FormButton from '../../components/FormButton';
 import MessageModal from '../../components/MessageModal';
 import { checkWifiConnection } from '../../utils/Methods'
-import { AuthContext } from '../../auth/AuthProvider'
+import { AuthContext } from '../../providers/AuthProvider'
 import Progressbar from "../../components/Progressbar";
 
 const Constant = createConstant()

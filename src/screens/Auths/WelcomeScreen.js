@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { View, Image, StyleSheet, Text, TouchableOpacity, SafeAreaView } from "react-native";
 import { createConstant } from "../../utils/Constant"
 import { bg_color, text_color } from "../../assets/colors";
-import { AuthContext } from "../../auth/AuthProvider";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Constant = createConstant();
 const HEIGHT = Constant.HEIGHT;

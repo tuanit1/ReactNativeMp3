@@ -1,6 +1,6 @@
 import React, { useContext, useState, useCallback, memo } from 'react';
 import { SafeAreaView, View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
-import { AuthContext } from '../../auth/AuthProvider';
+import { AuthContext } from '../../providers/AuthProvider';
 import { bg_color, text_color } from '../../assets/colors';
 import { createConstant } from '../../utils/Constant';
 import FormInput from '../../components/FormInput';
