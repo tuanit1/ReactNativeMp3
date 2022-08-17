@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     image: {
         width: '100%',
         height: '100%',
-        borderRadius: HEIGHT * 0.04,
+        borderRadius: HEIGHT * 0.05,
     },
 
     title_container: {
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         flexDirection: 'row',
         top: (HEIGHT / 2) * 0.7,
-        backgroundColor: '#221c27',
+        backgroundColor: '#141414',
         width: WIDTH * 0.8,
         height: (HEIGHT / 2) * 0.15,
         borderWidth: HEIGHT * 0.0015,

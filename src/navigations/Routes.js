@@ -5,32 +5,8 @@ import { NavigationContainer } from "@react-navigation/native"
 import AuthStack from "../navigations/AuthStack"
 import { View, Text, Button } from "react-native"
 import firestore from '@react-native-firebase/firestore';
-
+import AppNav from "./AppNav"
 import InitProfileScreen from "../screens/Auths/InitProfileScreen"
-
-
-const Welcome = () => {
-    const { user, logout } = useContext(AuthContext);
-
-    console.log("main screen re-render")
-
-    return (
-        <View style={{
-            flex: 1,
-            flexDirection: 'column',
-            backgroundColor: 'white',
-            justifyContent: 'center',
-            alignItems: 'center',
-            color: 'black'
-        }}>
-            <Text style={{ color: 'black' }}>Welcome {user ? user.email : "anonymous user"}</Text>
-            <Button
-                onPress={logout}
-                title="Log out"
-            />
-        </View>
-    )
-}
 
 const Routes = () => {
 
@@ -84,7 +60,7 @@ const Routes = () => {
         <NavigationContainer>
 
             {user && createProfile ? <InitProfileScreen />
-                : user || skip ? <Welcome /> : <AuthStack />
+                : user || skip ? <AppNav /> : <AuthStack />
             }
 
         </NavigationContainer>

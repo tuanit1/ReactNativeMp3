@@ -25,7 +25,6 @@ const LoginScreen = ({ navigation }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [modalParam, setModalParam] = useState({ title: 'Title', message: 'Description' });
 
-
     const showMessageModal = (title, message) => {
         setModalParam({
             title,
@@ -209,6 +208,7 @@ const styles = StyleSheet.create({
     view_button: {
         position: 'absolute',
         top: HEIGHT * 0.54,
+
         alignItems: 'center',
         width: WIDTH,
     },

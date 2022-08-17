@@ -15,7 +15,6 @@ const AuthProvider = ({ children }) => {
     const [showProgress, setShowProgress] = useState(false);
     const [createProfile, setCreateProfile] = useState(false);
 
-
     const logout = async () => {
 
         console.log('Click Log out');
