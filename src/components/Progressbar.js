@@ -20,12 +20,9 @@ const Progressbar = () => {
 const styles = StyleSheet.create({
     view_progress: {
         position: 'absolute',
-        top: 0,
+        top: HEIGHT*0.5,
         left: 0,
-        bottom: 0,
         right: 0,
-        justifyContent: 'center',
-        alignItems: 'center',
     }
 })
 

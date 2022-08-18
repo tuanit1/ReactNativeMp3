@@ -8,13 +8,17 @@ const Constant = createConstant()
 const HEIGHT = Constant.HEIGHT;
 const WIDTH = Constant.WIDTH;
 
-const PlaylistItem = ({ item , isLast }) => {
+const PlaylistItem = ({ item, isLast, clickListener }) => {
 
     return (
-        <TouchableOpacity style={{
-            ...styles.container,
-            marginEnd: isLast ? WIDTH * 0.05 : 0,
-        }}>
+        <TouchableOpacity
+
+            onPress={clickListener}
+
+            style={{
+                ...styles.container,
+                marginEnd: isLast ? WIDTH * 0.05 : 0,
+            }}>
 
 
             <View style={{
@@ -25,13 +29,13 @@ const PlaylistItem = ({ item , isLast }) => {
 
                 <Image
                     style={styles.image}
-                    source={{ uri: item.url}}
+                    source={{ uri: item.url }}
                     resizeMode='cover'
-                
+
                 />
 
                 <View style={styles.foreground}>
-                    <Icon name="play" color='white' size={HEIGHT*0.04} />
+                    <Icon name="play" color='white' size={HEIGHT * 0.04} />
                 </View>
             </View>
 

@@ -11,6 +11,8 @@ import { AuthContext } from '../../providers/AuthProvider';
 import { checkWifiConnection } from '../../utils/Methods';
 import MessageModal from '../../components/MessageModal';
 import Progressbar from '../../components/Progressbar';
+import HomeReducer from '../../reducers/HomeReducer';
+import { SET_DATA, SET_REFRESHING, SET_MODAL_VISIBLE, SET_SHOW_PROGRESS } from '../../actions/HomeAction'
 
 const Constant = createConstant();
 const HEIGHT = Constant.HEIGHT;
@@ -29,79 +31,11 @@ const initState = {
     showProgress: true
 
 }
-//action
-const SET_DATA = (playlists, songs, genres, artists) => {
-    return {
-        type: 'SET_DATA',
-        playlists,
-        songs,
-        genres,
-        artists
-    }
-}
 
-const SET_REFRESHING = (isRefreshing) => {
-    return {
-        type: 'SET_REFRESHING',
-        refreshing: isRefreshing
-    }
-}
-
-const SET_MODAL_VISIBLE = (title, message, visible) => {
-    return {
-        type: 'SET_MODAL_VISIBLE',
-        title,
-        message,
-        visible
-    }
-}
-
-const SET_SHOW_PROGRESS = (visible) => {
-    return {
-        type: 'SET_SHOW_PROGRESS',
-        visible
-    }
-}
-
-//Reducer
-const homeReducer = (state, action) => {
-    switch (action.type) {
-        case 'SET_DATA':
-            return {
-                ...state,
-                playlists: action.playlists,
-                songs: action.songs,
-                genres: action.genres,
-                artists: action.artists,
-                refreshing: false,
-                showProgress: false,
-            }
-
-        case 'SET_REFRESHING':
-            return {
-                ...state,
-                refreshing: action.refreshing,
-            }
-        case 'SET_MODAL_VISIBLE':
-            return {
-                ...state,
-                modalTitle: action.title,
-                modalMessage: action.message,
-                modalVisible: action.visible,
-                refreshing: false,
-            }
-        case 'SET_SHOW_PROGRESS':
-            return {
-                ...state,
-                showProgress: action.visible,
-            }
-    }
-}
-
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
 
     const { user } = useContext(AuthContext)
-    const [state, dispatch] = useReducer(homeReducer, initState)
+    const [state, dispatch] = useReducer(HomeReducer, initState)
 
     console.log('Re-render HomeScreen');
     console.log('Current state:', state)
@@ -182,6 +116,15 @@ const HomeScreen = () => {
         )
     }
 
+    const openPlaylistDetailScreen = (thumb, title, type, playlist_id) => {
+        navigation.navigate(Constant.PLAYLISTDETAILS_SCREEN, {
+            thumb,
+            title,
+            type,
+            playlist_id,
+        });
+    }
+
     useEffect(() => {
         dispatch(SET_SHOW_PROGRESS(true));
         fetchData();
@@ -225,7 +168,12 @@ const HomeScreen = () => {
                                     url: item.playlist_thumb,
                                 }
 
-                                return <PlaylistItem item={param} isLast={isLast} />
+                                return <PlaylistItem
+                                    clickListener={() =>
+                                        openPlaylistDetailScreen(item.playlist_thumb, item.playlist_name, Constant.TYPE_PLAYLIST, item.playlist_id)
+                                    }
+                                    item={param}
+                                    isLast={isLast} />
                             }}
                             keyExtractor={item => item.playlist_id}
                             horizontal={true}
@@ -250,7 +198,12 @@ const HomeScreen = () => {
                                     url: item.artist_thumb,
                                 }
 
-                                return <ArtistItem item={param} isLast={isLast} />
+                                return <ArtistItem
+                                    clickListener={() =>
+                                        openPlaylistDetailScreen(item.artist_thumb, item.artist_name, Constant.TYPE_ARTIST, item.artist_id)
+                                    }
+                                    item={param}
+                                    isLast={isLast} />
                             }}
                             keyExtractor={item => item.artist_id}
                             horizontal={true}
@@ -274,7 +227,12 @@ const HomeScreen = () => {
                                     url: item.genre_thumb,
                                 }
 
-                                return <GenreItem item={param} isLast={isLast} />
+                                return <GenreItem
+                                    clickListener={() =>
+                                        openPlaylistDetailScreen(item.genre_thumb, item.genre_name, Constant.TYPE_GENRE, item.genre_id)
+                                    }
+                                    item={param}
+                                    isLast={isLast} />
                             }}
                             keyExtractor={item => item.genre_id}
                             horizontal={true}
@@ -302,7 +260,7 @@ const HomeScreen = () => {
 
             </ScrollView>
 
-            
+
             {state.showProgress &&
                 <Progressbar />
             }

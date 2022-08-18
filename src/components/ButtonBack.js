@@ -18,14 +18,15 @@ const ButtonBack = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
+        position: 'absolute',
         top: Constant.HEIGHT * 0.03,
         left: Constant.HEIGHT * 0.03
     },
 
     image: {
-        height: Constant.HEIGHT * 0.05,
-        width: Constant.HEIGHT * 0.05,
-        tintColor: text_color
+        height: Constant.HEIGHT * 0.045,
+        width: Constant.HEIGHT * 0.045,
+        tintColor: 'white'
     }
 })
 

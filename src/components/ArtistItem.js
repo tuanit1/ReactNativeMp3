@@ -8,13 +8,17 @@ const Constant = createConstant()
 const HEIGHT = Constant.HEIGHT;
 const WIDTH = Constant.WIDTH;
 
-const ArtistItem = ({ item, isLast }) => {
+const ArtistItem = ({ item, isLast, clickListener }) => {
 
     return (
-        <TouchableOpacity style={{
-            ...styles.container,
-            marginEnd: isLast ? WIDTH * 0.05 : 0,
-        }}>
+        <TouchableOpacity
+
+            onPress={clickListener}
+
+            style={{
+                ...styles.container,
+                marginEnd: isLast ? WIDTH * 0.05 : 0,
+            }}>
 
 
             <Image
