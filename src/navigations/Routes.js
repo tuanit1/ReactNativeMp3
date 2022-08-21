@@ -5,7 +5,7 @@ import { NavigationContainer } from "@react-navigation/native"
 import AuthStack from "../navigations/AuthStack"
 import { View, Text, Button } from "react-native"
 import firestore from '@react-native-firebase/firestore';
-import AppNav from "./AppNav"
+import AppNavigation from "./AppNavigation"
 import InitProfileScreen from "../screens/Auths/InitProfileScreen"
 
 const Routes = () => {
@@ -60,7 +60,7 @@ const Routes = () => {
         <NavigationContainer>
 
             {user && createProfile ? <InitProfileScreen />
-                : user || skip ? <AppNav /> : <AuthStack />
+                : user || skip ? <AppNavigation /> : <AuthStack />
             }
 
         </NavigationContainer>

@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useReducer } from 'react'
 import { SafeAreaView, ScrollView, View, FlatList, RefreshControl, Text, StyleSheet } from 'react-native';
-import { bg_color, text_color } from '../../assets/colors';
+import { bg_color, text_color, main_color } from '../../assets/colors';
 import { createConstant } from '../../utils/Constant';
 import { createRequest } from '../../utils/Methods';
 import PlaylistItem from '../../components/PlaylistItem';
@@ -12,6 +12,7 @@ import { checkWifiConnection } from '../../utils/Methods';
 import MessageModal from '../../components/MessageModal';
 import Progressbar from '../../components/Progressbar';
 import HomeReducer from '../../reducers/HomeReducer';
+import TrackPlayer from 'react-native-track-player';
 import { SET_DATA, SET_REFRESHING, SET_MODAL_VISIBLE, SET_SHOW_PROGRESS } from '../../actions/HomeAction'
 
 const Constant = createConstant();
@@ -114,6 +115,27 @@ const HomeScreen = ({ navigation }) => {
                 }}>{welcome2}</Text>
             </View>
         )
+    }
+
+    const playSingleSong = async (song) => {
+
+        await TrackPlayer.reset();
+
+        const artist_name = state.artists.map(artist => {
+            if (artist.artist_id === song.artist_id) {
+                return artist.artist_name
+            }
+        })
+
+        await TrackPlayer.add({
+            url: song.song_url,
+            title: song.song_name,
+            artist: artist_name,
+            artwork: song.song_thumb,
+
+        })
+
+        TrackPlayer.play();
     }
 
     const openPlaylistDetailScreen = (thumb, title, type, playlist_id) => {
@@ -249,6 +271,7 @@ const HomeScreen = ({ navigation }) => {
                                 key={song.song_id}
                                 url={song.song_thumb}
                                 song_name={song.song_name}
+                                onPress={() => { playSingleSong(song) }}
                                 artist_name={state.artists.map(artist => {
                                     if (artist.artist_id === song.artist_id) {
                                         return artist.artist_name

@@ -15,6 +15,7 @@ import Progressbar from '../../components/Progressbar';
 import { checkWifiConnection } from '../../utils/Methods';
 import SongItem from '../../components/SongItem';
 import ButtonBack from '../../components/ButtonBack';
+import TrackPlayer from 'react-native-track-player';
 
 const Constant = createConstant();
 const { HEIGHT, WIDTH } = Constant;
@@ -34,8 +35,6 @@ const PlaylistDetailScreen = ({ route, navigation }) => {
     const { thumb, title, type, playlist_id } = route.params;
     const [state, dispatch] = useReducer(PlaylistDetailReducer, initState)
 
-    console.log(route.params);
-
     const onRefresh = () => {
         dispatch(SET_REFRESHING(true));
         fetchData();
@@ -50,8 +49,6 @@ const PlaylistDetailScreen = ({ route, navigation }) => {
             dispatch(SET_MODAL_VISIBLE("Alert", "No internet connection", true));
             return;
         }
-
-        console.log("Fetching...")
 
         let get_song_url = '';
 
@@ -88,7 +85,73 @@ const PlaylistDetailScreen = ({ route, navigation }) => {
     useEffect(() => {
         dispatch(SET_SHOW_PROGRESS(true));
         fetchData();
-    }, [])
+    }, []);
+
+    const playAllSong = () => {
+
+
+        const tracks = [];
+
+        state.songs.map(song => {
+
+            const artist_name = state.artists.map(artist => {
+                if (artist.artist_id === song.artist_id) {
+                    return artist.artist_name
+                }
+            });
+
+            const track_obj = {
+                url: song.song_url,
+                title: song.song_name,
+                artwork: song.song_thumb,
+                artist: artist_name,
+            }
+
+            tracks.push(track_obj);
+        })
+
+        TrackPlayer.reset();
+        TrackPlayer.add(tracks)
+        TrackPlayer.play();
+
+    }
+
+    const playWithSelectedSong = (selected_song) => {
+
+        let filter_songs = state.songs.filter(song => {
+            return song.song_id !== selected_song.song_id;
+        });
+
+        filter_songs.splice(0, 0, selected_song);
+
+        const tracks = [];
+
+        filter_songs.map(song => {
+
+            const artist_name = state.artists.map(artist => {
+                if (artist.artist_id === song.artist_id) {
+                    return artist.artist_name
+                }
+            });
+
+            const track_obj = {
+                url: song.song_url,
+                title: song.song_name,
+                artwork: song.song_thumb,
+                artist: artist_name,
+            }
+
+            tracks.push(track_obj);
+        })
+
+        TrackPlayer.reset();
+        TrackPlayer.add(tracks)
+        TrackPlayer.play();
+
+        
+
+
+    }
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -137,7 +200,7 @@ const PlaylistDetailScreen = ({ route, navigation }) => {
                             flexDirection: 'row',
                             alignItems: 'center'
                         }}>
-                            <TouchableOpacity style={{
+                            <TouchableOpacity onPress={playAllSong} style={{
                                 marginVertical: HEIGHT * 0.015,
                                 marginRight: WIDTH * 0.03
                             }}>
@@ -168,6 +231,7 @@ const PlaylistDetailScreen = ({ route, navigation }) => {
                                 key={song.song_id}
                                 url={song.song_thumb}
                                 song_name={song.song_name}
+                                onPress={() => playWithSelectedSong(song)}
                                 artist_name={state.artists.map(artist => {
                                     if (artist.artist_id === song.artist_id) {
                                         return artist.artist_name

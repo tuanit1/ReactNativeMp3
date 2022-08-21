@@ -13,8 +13,7 @@ const Constant = createConstant();
 const HEIGHT = Constant.HEIGHT;
 const WIDTH = Constant.WIDTH;
 
-const AppNav = () => {
-
+const BottomNavigation = () => {
     return (
         <Tab.Navigator
             initialRouteName={Constant.HOME_SCREEN}
@@ -23,7 +22,7 @@ const AppNav = () => {
                 tabBarStyle: {
                     borderTopColor: main_color,
                     borderTopWidth: HEIGHT * 0.0015,
-                    height: HEIGHT * 0.09,
+                    height: HEIGHT * 0.07,
                     paddingHorizontal: HEIGHT * 0.05,
                     backgroundColor: 'black'
                 },
@@ -33,7 +32,7 @@ const AppNav = () => {
 
                     let iconName;
                     const iconColor = focused ? main_color : '#195a19';
-                    const iconSize = focused ? HEIGHT * 0.035 : HEIGHT * 0.03;
+                    const iconSize = focused ? HEIGHT * 0.032 : HEIGHT * 0.025;
 
                     switch (route.name) {
                         case "HomeStack":
@@ -58,4 +57,4 @@ const AppNav = () => {
     )
 }
 
-export default AppNav;
+export default BottomNavigation

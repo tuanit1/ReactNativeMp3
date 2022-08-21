@@ -9,10 +9,10 @@ const Constant = createConstant()
 const HEIGHT = Constant.HEIGHT;
 const WIDTH = Constant.WIDTH;
 
-const SongItem = ({ url, song_name, artist_name }) => {
+const SongItem = ({ url, song_name, artist_name, ...rest }) => {
 
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} {...rest}>
 
             <Image
                 style={styles.image}
@@ -33,7 +33,8 @@ const SongItem = ({ url, song_name, artist_name }) => {
                 </Text>
 
                 <Text style={{
-                    color: '#999999'
+                    color: '#999999',
+                    fontSize: HEIGHT * 0.018,
                 }}>
                     {artist_name}
                 </Text>
