@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { StyleSheet, Image, Text, View, TouchableOpacity, Pressable, ActivityIndicator } from 'react-native';
+import { StyleSheet, Platform, Image, Text, View, TouchableOpacity, Pressable, ActivityIndicator } from 'react-native';
 import { createConstant } from '../../utils/Constant';
 import { main_color, text_color } from '../../assets/colors';
 import { PlayerContext } from '../../providers/PlayerProvider';
@@ -69,10 +69,26 @@ const MusicScreen = () => {
         return minute + ":" + rest_seconds;
     }
 
+    const getAverageColor = () => {
+        if(Platform.OS === 'ios'){
+            return averageColor.primary;
+        }else{
+            return averageColor.average;
+        }
+    }
+
+    const geCollapseColor = () => {
+        if(Platform.OS === 'ios'){
+            return averageColor.quality;
+        }else{
+            return averageColor.darkVibrant;
+        }
+    }
+
     return (
         <View
             style={{
-                backgroundColor: averageColor ? averageColor.average : '#202020',
+                backgroundColor: averageColor ? getAverageColor() : '#202020',
                 height: HEIGHT * 0.97,
                 borderWidth: 1,
                 borderTopColor: main_color
@@ -97,7 +113,7 @@ const MusicScreen = () => {
                 <Pressable onPress={() => bottomSheet.current.snapTo(0)}>
                     <View style={{
                         ...styles.collapse_view,
-                        backgroundColor: averageColor ? averageColor.darkMuted : '#000000'
+                        backgroundColor: averageColor ? geCollapseColor() : '#000000'
                     }}>
                         <Image
                             style={styles.image}

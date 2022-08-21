@@ -1,5 +1,5 @@
 import React, { createContext, useState, useRef } from 'react';
-import { View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import PlayerBottomSheet from '../components/PlayerBottomSheet';
 import { createConstant } from '../utils/Constant';
 import { main_color } from '../assets/colors';

@@ -6,8 +6,8 @@ export const createConstant = () => {
     constant.HEIGHT = Dimensions.get("window").height;
     constant.WIDTH = Dimensions.get("window").width;
     constant.WEB_CLIENT_ID = "334290680991-uc7nk64uor2oqk4sq68ajmibsakrco0u.apps.googleusercontent.com";
-    constant.API_URL = "http://192.168.1.12/ReactNativeMp3/api/";
-    // constant.API_URL = "http://localhost/ReactNativeMp3/api/";
+    // constant.API_URL = "http://192.168.1.12/ReactNativeMp3/api/";
+    constant.API_URL = "http://localhost/ReactNativeMp3/api/";
 
     constant.TYPE_PLAYLIST = 'TYPE_PLAYLIST';
     constant.TYPE_GENRE = 'TYPE_GENRE';
