@@ -81,7 +81,7 @@ const MusicScreen = () => {
         if(Platform.OS === 'ios'){
             return averageColor.quality;
         }else{
-            return averageColor.darkVibrant;
+            return averageColor.darkMuted;
         }
     }
 

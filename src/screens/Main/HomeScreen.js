@@ -63,6 +63,8 @@ const HomeScreen = ({ navigation }) => {
         const get_genre_url = Constant.API_URL + 'genre/getAll.php';
         const get_artist_url = Constant.API_URL + 'artist/getAll.php';
 
+        console.log(get_song_url);
+
         const array_playlist = await createRequest(get_playlist_url, 'GET', {});
         const array_song = await createRequest(get_song_url, 'GET', {});
         const array_genre = await createRequest(get_genre_url, 'GET', {});
