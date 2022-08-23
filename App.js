@@ -4,13 +4,6 @@ import AuthProvider from './src/providers/AuthProvider'
 import Routes from './src/navigations/Routes'
 import TrackPlayer, { RepeatMode } from 'react-native-track-player';
 
-// const tracks = [
-//     {
-//         id: 1,
-//         url: 'https://tainhacmienphi.biz/get/song/api/349290',
-//         title: 'Chung ta cua hien tai'
-//     }
-// ]
 
 TrackPlayer.updateOptions({
     stopWithApp: false,
@@ -23,7 +16,6 @@ const App = () => {
     const setUpTrackPlayer = async () => {
         try {
             await TrackPlayer.setupPlayer();
-            // await TrackPlayer.setRepeatMode(RepeatMode.Queue);
         } catch (e) {
             console.log(e)
         }
