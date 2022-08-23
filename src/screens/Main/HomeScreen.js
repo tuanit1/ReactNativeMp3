@@ -39,7 +39,6 @@ const HomeScreen = ({ navigation }) => {
     const [state, dispatch] = useReducer(HomeReducer, initState)
 
     console.log('Re-render HomeScreen');
-    console.log('Current state:', state)
 
     const onRefresh = () => {
         dispatch(SET_REFRESHING(true));
@@ -71,10 +70,10 @@ const HomeScreen = ({ navigation }) => {
         const array_artist = await createRequest(get_artist_url, 'GET', {});
 
         dispatch(SET_DATA(
-            array_playlist.data,
-            array_song.data,
-            array_genre.data,
-            array_artist.data
+            array_playlist.data ? array_playlist.data : [],
+            array_song.data ? array_song.data: [],
+            array_genre.data ? array_genre.data: [],
+            array_artist.data ? array_artist.data: []
         ));
 
     }

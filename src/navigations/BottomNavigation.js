@@ -6,6 +6,7 @@ import SearchScreen from '../screens/Main/SearchScreen';
 import InfoScreen from '../screens/Main/InfoScreen';
 import { main_color } from '../assets/colors';
 import HomeStack from './HomeStack';
+import SearchStack from './SearchStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -38,7 +39,7 @@ const BottomNavigation = () => {
                         case "HomeStack":
                             iconName = "home";
                             break;
-                        case Constant.SEARCH_SCREEN:
+                        case "SearchStack":
                             iconName = "search";
                             break;
                         case Constant.INFO_SCREEN:
@@ -50,7 +51,7 @@ const BottomNavigation = () => {
                 }
             })}>
             <Tab.Screen name={"HomeStack"} component={HomeStack} />
-            <Tab.Screen name={Constant.SEARCH_SCREEN} component={SearchScreen} />
+            <Tab.Screen name={"SearchStack"} component={SearchStack} />
             <Tab.Screen name={Constant.INFO_SCREEN} component={InfoScreen} />
         </Tab.Navigator>
 
