@@ -1,8 +1,8 @@
-## Description
+## Overview
 - Simple music player application written in React Native
 - Firebase authentication
 - Using [TrackPlayer](https://react-native-track-player.js.org/) for core function
-
+- Download APK: [tunamusic.apk](https://drive.google.com/file/d/1G_sUXetMJTs7rI9T2Y0V-HN-em350LMw/view?usp=sharing)
 ## Screenshots
 **On Android:**
 
