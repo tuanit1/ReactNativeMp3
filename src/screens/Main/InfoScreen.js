@@ -83,15 +83,17 @@ const InitScreen = () => {
 
     useEffect(() => {
 
-        firestore().collection('users').doc(user.uid).get()
-            .then(userDoc => {
-                console.log(userDoc.data());
+        if (user) {
+            firestore().collection('users').doc(user.uid).get()
+                .then(userDoc => {
+                    console.log(userDoc.data());
 
-                setName(userDoc.data().name);
-                setAge(""+userDoc.data().age);
-                setPhone(userDoc.data().phone);
-            })
-        
+                    setName(userDoc.data().name);
+                    setAge("" + userDoc.data().age);
+                    setPhone(userDoc.data().phone);
+                })
+        }
+
     }, [])
 
 
@@ -147,6 +149,17 @@ const InitScreen = () => {
 
                     <View style={styles.view_button}>
                         <FormButton title={"Submit"} clickListener={handleSubmit} />
+
+                    </View>
+
+                    <View style={{
+                        position: 'absolute',
+                        top: HEIGHT * 0.68,
+                        alignItems: 'center',
+                        width: WIDTH,
+                    }}>
+                        <FormButton title={"Log out"} clickListener={logout} />
+
                     </View>
                 </>
                 :
@@ -171,14 +184,14 @@ const styles = StyleSheet.create({
 
     view_input: {
         position: 'absolute',
-        top: HEIGHT * 0.15,
+        top: HEIGHT * 0.1,
         width: WIDTH,
         alignItems: 'center',
     },
 
     view_button: {
         position: 'absolute',
-        top: HEIGHT * 0.65,
+        top: HEIGHT * 0.58,
         alignItems: 'center',
         width: WIDTH,
     },
