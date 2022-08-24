@@ -3,6 +3,7 @@ import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import MessageModal from '../components/MessageModal';
 import firestore from '@react-native-firebase/firestore';
+import { get } from "react-native/Libraries/Utilities/PixelRatio";
 
 const AuthContext = createContext({});
 
@@ -173,6 +174,29 @@ const AuthProvider = ({ children }) => {
 
     }
 
+    const updateProfile = async (name, phone, age) => {
+
+        setShowProgress(true);
+
+        firestore().collection('users').doc(user.uid)
+            .set({ name, phone, age })
+            .then(() => {
+
+                setShowProgress(false);
+
+                setModalParam({
+                    title: 'Alert',
+                    message: 'Your profile have been updated'
+                });
+                setModalVisible(true);
+            })
+            .catch((error) => {
+                setShowProgress(true);
+                console.log(error);
+            })
+
+    }
+
     return (
 
         <AuthContext.Provider
@@ -189,7 +213,8 @@ const AuthProvider = ({ children }) => {
                 googleLogin,
                 logout,
                 signup,
-                initProfile
+                initProfile,
+                updateProfile
             }}>
 
             <MessageModal
