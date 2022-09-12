@@ -89,8 +89,8 @@ const MusicScreen = () => {
         <View
             style={{
                 backgroundColor: averageColor ? getAverageColor() : '#202020',
-                height: HEIGHT * 0.97,
-                borderWidth: 1,
+                height: HEIGHT,
+                borderWidth: isExpand ? 1 : 0,
                 borderTopColor: main_color
             }}
         >
@@ -104,7 +104,7 @@ const MusicScreen = () => {
                     'rgba(0, 0, 0, 1)']}
                 style={{
                     position: 'absolute',
-                    height: HEIGHT * 0.97,
+                    height: HEIGHT,
                     width: '100%'
                 }}
             />

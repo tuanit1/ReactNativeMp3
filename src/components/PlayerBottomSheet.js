@@ -15,7 +15,7 @@ const PlayerBottomSheet = () => {
         <BottomSheet
             ref={bottomSheet}
             initialSnap={1}
-            snapPoints={[HEIGHT * 0.97, HEIGHT * 0.09]}
+            snapPoints={[HEIGHT * 1, HEIGHT * 0.09]}
             renderContent={() => {
                 return <MusicScreen/>
             }}

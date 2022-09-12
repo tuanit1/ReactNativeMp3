@@ -21,7 +21,7 @@ const PlayerProvider = ({ children }) => {
                 setIsExpand,
                 isExpand,
             }}>
-            <View style={{
+            <SafeAreaView style={{
                 flex: 1,
                 backgroundColor: 'black'
             }}>
@@ -35,7 +35,7 @@ const PlayerProvider = ({ children }) => {
                     {children}
                 </View>
                 <PlayerBottomSheet />
-            </View>
+            </SafeAreaView>
 
         </PlayerContext.Provider>
     )
